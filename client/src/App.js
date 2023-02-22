@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import {auth} from "./firebaseHandler"
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from './features/userSlice';
+import ProfilePage from './scenes/ProfilePage';
 
 function App() {
   const user = useSelector(selectUser)
@@ -41,6 +42,7 @@ function App() {
       ) : (
         <Routes>        
           <Route path="/" element={<Homepage/>} />
+          <Route path="/profile" name="profile" element={<ProfilePage/>} />
         </Routes>
       )
     }
