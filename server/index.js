@@ -1,5 +1,5 @@
 import express from "express"
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 import mongoose from "mongoose"
 import cors from "cors"
 import dotenv from "dotenv"
@@ -15,7 +15,7 @@ app.use(cors())
 // app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 // app.use(bodyParser.json()); // Send JSON responses
 
-app.use('/', UserProfile)
+app.use('/users', UserProfile)
 app.use('/posts', Posts)
 const PORT = process.env.PORT || 6001
 mongoose.connect(process.env.MONGO_URL,{

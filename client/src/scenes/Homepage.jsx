@@ -29,7 +29,7 @@ function Homepage() {
   // })
   const getUser = async() => {
       const response = await fetch(
-        `http://localhost:3001/${email}`,
+        `http://localhost:3001/users/${email}`,
         {
         method:"GET",
         });
@@ -43,6 +43,7 @@ function Homepage() {
 
   useEffect(()=>{
     getUser()
+    // eslint-disable-next-line
   },[])
 
   return (

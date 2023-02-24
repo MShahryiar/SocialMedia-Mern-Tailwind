@@ -2,7 +2,7 @@ import React from 'react'
 
 function Profile({UserId, emailID,dob,city, country, fb, insta}) {
   return (
-    <div className='bg-red-100 col-span-2 overflow-hidden'>
+    <div className='bg-red-100 col-span-2 h-fit p-5 overflow-hidden'>
 
         <p>Profile</p>
         <p>UserId : {UserId}</p>
