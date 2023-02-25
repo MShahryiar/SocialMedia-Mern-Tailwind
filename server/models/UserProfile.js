@@ -36,7 +36,11 @@ const UserProfileSchema = new mongoose.Schema({
     InstaLink:{
         type:String,
         required:true
-    }
+    },
+    friends:{
+            type:Array,
+            default:[],
+        },
 },{timestamps:true})
 
 

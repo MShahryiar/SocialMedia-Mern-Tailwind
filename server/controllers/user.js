@@ -24,3 +24,14 @@ export const getUser = async(req, res)=>{
         res.status(404).json({message:err.message})
     }
 }
+
+export const getAllUsers = async(req, res) =>{ 
+    try{
+        const users = await UserProfile.find()
+        res.status(200).json({users})
+        // res.json({message:"In All Users"})
+    }
+    catch(err){
+        res.status(404).json({message:err.message})
+    }
+}

@@ -18,15 +18,7 @@ function Homepage() {
   const country = userProfile.country
   const fb = userProfile.fbLink
   const insta = userProfile.InstaLink
-
-  // const [userProfile, setUserProfile] = useState({
-  //   username:'',
-  //   dob:"",
-  //   city:'',
-  //   country:'',
-  //   fbLink:"",
-  //   instaLink:"",
-  // })
+  
   const getUser = async() => {
       const response = await fetch(
         `http://localhost:3001/users/${email}`,
@@ -58,7 +50,7 @@ function Homepage() {
       
       <Profile UserId={userProfile._id} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
       <Post UserId={userProfile._id}/>
-      <Friends/>
+      <Friends Email={email}/>
 
     </div>
     </>
