@@ -20,7 +20,7 @@ function App() {
           // Logged In
           dispatch(
             login({
-              uid:userAuth.id,
+              uid:userAuth.uid,
               email:userAuth.email
             })
           )
@@ -41,8 +41,8 @@ function App() {
         <Auth/>
       ) : (
         <Routes>        
-          <Route path="/" element={<Homepage/>} />
-          <Route path="/profile" name="profile" element={<ProfilePage/>} />
+          <Route path="/" name="profile" element={<ProfilePage/>} />
+          <Route path="/index" name="index" element={<Homepage/>} />
         </Routes>
       )
     }

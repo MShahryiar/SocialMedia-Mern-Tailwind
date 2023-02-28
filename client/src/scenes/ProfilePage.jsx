@@ -15,11 +15,13 @@ function ProfilePage() {
   const [fbLink, setFbLink] = useState("")
   const [InstaLink, setInstaLink] = useState("")
   
+  
+
   const handleUserSubmission = async(e) =>{
     e.preventDefault()
     
     const response = await fetch(
-      "http://localhost:3001/{}",
+      "http://localhost:3001/users",
       {
       method:"POST",
       headers:{
@@ -28,6 +30,9 @@ function ProfilePage() {
       body: JSON.stringify({name, email, dob, city, country, fbLink, InstaLink})
     })
     const userProfile = await response.json()
+    if (userProfile){
+      alert("User Created")
+    }
   }
 
 
@@ -47,7 +52,7 @@ function ProfilePage() {
                  <div className='mt-3 flex justify-between'>
 
                  <button className='bg-teal-600 w-1/1  rounded-lg p-3 text-white hover:bg-teal-500'>Save Information</button>
-                 <button className=' w-1/1  rounded-lg p-3  hover:bg-teal-600 hover:text-white bg-teal-600/20' onClick={()=>navigate("/")}>Home Page</button>
+                 <button className=' w-1/1  rounded-lg p-3  hover:bg-teal-600 hover:text-white bg-teal-600/20' onClick={()=>navigate("/index")}>Home Page</button>
                  </div>
              </form>
      </div>

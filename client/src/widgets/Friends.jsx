@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
 const Friends = ({Email}) => {
-  const [friends, setFriends] = useState([])
   const userEmail = Email
   const getPeople = async() => {
     try{
@@ -19,6 +18,7 @@ const Friends = ({Email}) => {
       console.log(err)
     }
   }
+  const [friends, setFriends] = useState([])
   useEffect(()=>{
     getPeople()
   },[])
@@ -27,11 +27,11 @@ const Friends = ({Email}) => {
     <div className='bg-red-200 col-span-2 h-fit p-5 '><span className='underline underline-offset-4 text-xl'>Add Friends</span> 
       {
         // {tasks.filter(task=>task.email === email).map((task)=>(
-        friends.filter(friend=>friend.email!=userEmail).map((friend)=> (
+        friends.filter(friend=>friend.email!==userEmail).map((friend)=> (
  
-          <div className='flex justify-between' key={friend._id}>
-            <div>{friend.email}</div>
-            <button className='bg-gray-200 p-1 rounded hover:cursor-pointer'>Add Friend</button>
+          <div className='flex justify-between mt-2 bg-white  rounded-md p-2' key={friend._id}>
+            <div className='mt-2'>{friend.email}</div>
+            <button className='bg-gray-200 p-2 rounded hover:cursor-pointer'>Add Friend</button>
           </div>
         ))
       }

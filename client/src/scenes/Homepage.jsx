@@ -20,6 +20,8 @@ function Homepage() {
   const insta = userProfile.InstaLink
   
   const getUser = async() => {
+    try{
+
       const response = await fetch(
         `http://localhost:3001/users/${email}`,
         {
@@ -27,9 +29,15 @@ function Homepage() {
         });
         
       const userProfile = await response.json()
-      const user = userProfile.user[0]
-      console.log(userProfile.user[0])
-      setUserProfile(user)
+        const user = userProfile.user[0]
+        setUserProfile(user)
+        console.log(userProfile.user[0])
+
+
+    }
+    catch(err){
+      console.log(err)
+    }
       
   }
 
@@ -42,7 +50,7 @@ function Homepage() {
     <>
     <nav className='bg-red-300 w-full p-1 flex justify-between'>
     <div className='flex items-center'><h1 className='text-2xl text-white font-bold'>Social Media App</h1></div>
-    <div className='items-center flex'><p className='text-white text-xl '>Welcome - <span className='underline underline-offset-8 cursor-pointer' onClick={() => navigate("/profile")}>{user.email}</span></p></div>
+    <div className='items-center flex'><p className='text-white text-xl '>Welcome - <span className='underline underline-offset-8 cursor-pointer' onClick={() => navigate("/")}>{user.email}</span></p></div>
     <button className='bg-red-400 hover:bg-white hover:text-red-400 hover:border-red-400 text-sm m-2 rounded-md p-3 text-white ' onClick={()=>auth.signOut()}>Logout</button>
     </nav>
     

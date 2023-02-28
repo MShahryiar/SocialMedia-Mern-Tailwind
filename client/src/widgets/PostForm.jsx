@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { useSelector } from 'react-redux'
+import { selectUser } from '../features/userSlice'
 function PostForm({UserId}) {
     const navigate = useNavigate()
+    const user = useSelector(selectUser)
+    // const ID = user.uid
     const [postDescription, setPostDescription] = useState("")
     const [posts, setPosts] = useState([])
     const handlePostSubmission = async(e) =>{
@@ -44,9 +47,20 @@ function PostForm({UserId}) {
         }
         
     }
+    const DeletePost = async(id) => {
+      const response = await fetch(
+        `http://localhost:3001/posts/${id}`,
+        {
+          method:"DELETE",
+        },
+        // console.log("POST DELETED"),
+        getPosts()
+      )
+    }
     useEffect(()=>{
       getPosts()
-    },[])
+      // console.log("USER ID STORE -> ", user)
+    },[posts])
   return (
     <>
         <form className="w-full  border-red-400" onSubmit={handlePostSubmission}>
@@ -60,12 +74,27 @@ function PostForm({UserId}) {
         { posts.map((post)=>(
           
           <div key={post._id} className="bg-white m-2 p-5">
-            <p className='underline cursor-pointer'>{post.userId}</p>
+            <>
+            <div className={`flex justify-between `}>
+              
+            <p className='underline cursor-pointer'>{post.userId} - {post._id}</p>
+            {
+             (UserId === post.userId)?<button className='bg-red-500 p-2 rounded text-white' onClick={()=>DeletePost(post._id)}>Delete</button>:''
+
+            }
+
+            </div>
+    
+       
+       
+            {/* <p>UserID{UserId}</p> */}
             <p className='text-xl'>{post.description}</p>
             <div className="flex space-x-2 mt-5">
                 <button className='text-xs p-2  bg-green-600 rounded-md text-white'>Like</button>
                 <button className='text-xs p-2  bg-red-600 rounded-md text-white'>Dislike</button>
             </div>
+            </>
+          
           </div>
         ))
         }

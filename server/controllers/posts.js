@@ -24,3 +24,15 @@ export const getAllPosts = async(req, res) => {
         res.status(404).json({message:err.message})
     }
 }
+
+export const DeletePost = async (req, res) => {
+    try{
+        const {id} = req.params
+        const post = await Post.findById(id)
+        post.deleteOne()
+        res.status(200).json("POST DELETED")
+    }
+    catch(err){
+        res.status(404).json({message:err.message})
+    }
+}
