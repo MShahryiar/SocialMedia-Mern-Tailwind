@@ -35,3 +35,30 @@ export const getAllUsers = async(req, res) =>{
         res.status(404).json({message:err.message})
     }
 }
+
+export const AddDeleteFriend = async(req,res)=>{
+    try{
+        const {id,friendId} = req.params
+        const user = await UserProfile.findById(id)
+        const friend = await UserProfile.findById(friendId)
+
+        if (user.friends.includes(friendId)){
+            user.friends = user.friends.filter((id)=> id !== friendId)
+        }
+        else{
+            user.friends.push(friendId)
+            friend.friends.push(id)
+        }
+        await user.save()
+        await friend.save()
+
+        const friends = await Promise.all(
+            user.friends.map((id)=> UserProfile.findById(id))
+        )
+        res.status(200).json({friends})
+        // res.json({message: `Inside AddDeleteFriend controller - ID : ${id}, FriendID : ${friendId}`})
+    }
+    catch(err){
+        res.status(404).json({message:err.message})
+    }
+}

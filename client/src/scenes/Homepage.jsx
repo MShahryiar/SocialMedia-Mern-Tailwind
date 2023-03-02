@@ -18,7 +18,7 @@ function Homepage() {
   const country = userProfile.country
   const fb = userProfile.fbLink
   const insta = userProfile.InstaLink
-  
+
   const getUser = async() => {
     try{
 
@@ -31,7 +31,7 @@ function Homepage() {
       const userProfile = await response.json()
         const user = userProfile.user[0]
         setUserProfile(user)
-        console.log(userProfile.user[0])
+        // console.log(userProfile.user[0])
 
 
     }
@@ -40,6 +40,7 @@ function Homepage() {
     }
       
   }
+
 
   useEffect(()=>{
     getUser()
@@ -58,7 +59,7 @@ function Homepage() {
       
       <Profile UserId={userProfile._id} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
       <Post UserId={userProfile._id}/>
-      <Friends Email={email}/>
+      <Friends Email={email} UserId={userProfile._id}/>
 
     </div>
     </>

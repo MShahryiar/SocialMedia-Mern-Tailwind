@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../features/userSlice'
+// import { useSelector } from 'react-redux'
+// import { selectUser } from '../features/userSlice'
 function PostForm({UserId}) {
-    const navigate = useNavigate()
-    const user = useSelector(selectUser)
+    // const user = useSelector(selectUser)
     // const ID = user.uid
     const [postDescription, setPostDescription] = useState("")
     const [posts, setPosts] = useState([])
@@ -54,13 +52,16 @@ function PostForm({UserId}) {
           method:"DELETE",
         },
         // console.log("POST DELETED"),
+        // const res = response.json()
+        )
+        // const deletePost =  response.json()
+        // console.log(deletePost)
         getPosts()
-      )
     }
     useEffect(()=>{
       getPosts()
       // console.log("USER ID STORE -> ", user)
-    },[posts])
+    },[])
   return (
     <>
         <form className="w-full  border-red-400" onSubmit={handlePostSubmission}>
