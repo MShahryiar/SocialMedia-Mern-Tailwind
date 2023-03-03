@@ -19,6 +19,7 @@ function Homepage() {
   const fb = userProfile.fbLink
   const insta = userProfile.InstaLink
 
+
   const getUser = async() => {
     try{
 
@@ -60,7 +61,7 @@ function Homepage() {
       <Profile UserId={userProfile._id} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
       <Post UserId={userProfile._id}/>
       <Friends Email={email} UserId={userProfile._id}/>
-
+    
     </div>
     </>
   )

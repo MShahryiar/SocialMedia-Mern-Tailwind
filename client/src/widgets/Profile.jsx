@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 function Profile({UserId, emailID,dob,city, country, fb, insta}) {
+
+
+
+
+
+
+
   return (
     <>
     
@@ -16,6 +23,7 @@ function Profile({UserId, emailID,dob,city, country, fb, insta}) {
         <p>Insta : {insta}</p>
     <div>
       <h1 className='underline text-2xl '>Friends</h1>
+     
     </div>
     </div>
     

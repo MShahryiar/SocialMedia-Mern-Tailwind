@@ -62,3 +62,20 @@ export const AddDeleteFriend = async(req,res)=>{
         res.status(404).json({message:err.message})
     }
 }
+
+export const getUserFriends = async(req,res) => {
+    try{
+        const {id} = req.params
+        // const user = await UserProfile.findById(id)
+
+        // const friends = await Promise.all(
+        //     user.friends.map((id) => UserProfile.findById(id))
+        // )
+        // res.status(200).json({friends})
+        res.status(200).json(`Inside User Friends : ${id}`)
+
+    }
+    catch(err){
+        res.status(404).json({message:err.message})
+    }
+}

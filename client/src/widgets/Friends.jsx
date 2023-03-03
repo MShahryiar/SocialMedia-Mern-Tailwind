@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 
 const Friends = ({Email,UserId}) => {
   const userEmail = Email
+  const [friends, setFriends] = useState([])
 
   const AddRemoveFriend = async(id) => {
     try{
@@ -10,7 +11,8 @@ const Friends = ({Email,UserId}) => {
           method:"PATCH",
         })
       const friend = await response.json()
-      console.log(friend)
+      console.log(friend.friends)
+      setFriends(friend.friends)
     }
     catch(err){
       console.log('Error')
@@ -43,13 +45,20 @@ const Friends = ({Email,UserId}) => {
       {
         // {tasks.filter(task=>task.email === email).map((task)=>(
           peoples.filter(people=>people.email!==userEmail).map((people)=> (
- 
+              
           <div className='flex justify-between mt-2 bg-white  rounded-md p-2' key={people._id}>
             <div className='mt-2'>{people.email}</div>
             <button className='bg-gray-200 p-2 rounded hover:cursor-pointer' onClick={()=>AddRemoveFriend(people._id)}>Add Friend</button>
           </div>
         ))
       }
+          <div>
+            {
+              friends.map((friend)=> (
+                <p key={friend._id}>1 - {friend._id}</p>
+              ))
+            }
+          </div>
     </div>
   )
 }
