@@ -7,6 +7,6 @@ router.post('/', CreateUserProfile)
 router.get('/:email',getUser )
 router.get('/',getAllUsers )
 router.patch("/:id/:friendId", AddDeleteFriend)
-// router.get("/:id/friends", getUserFriends)
+router.get("/:id/friends", getUserFriends)
 
 export default router

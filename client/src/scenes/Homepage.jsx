@@ -19,7 +19,7 @@ function Homepage() {
   const fb = userProfile.fbLink
   const insta = userProfile.InstaLink
 
-
+  
   const getUser = async() => {
     try{
 
