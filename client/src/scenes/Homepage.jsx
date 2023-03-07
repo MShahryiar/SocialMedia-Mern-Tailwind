@@ -29,9 +29,13 @@ function Homepage() {
         method:"GET",
         });
         
-      const userProfile = await response.json()
-        const user = userProfile.user[0]
-        setUserProfile(user)
+      const data = await response.json()
+      
+      const userData = data.user[0]
+      setUserProfile(userData)
+      // console.log(user)
+        // const user = data.user[0]
+        // setUserProfile(user)
         // console.log(userProfile.user[0])
 
 

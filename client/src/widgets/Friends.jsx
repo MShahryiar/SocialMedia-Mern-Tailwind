@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Friend from './Friend'
+
+
 const Friends = ({Email,UserId}) => {
-  const ID = UserId
+  
   // const userEmail = Email
   const [userFriends, setUserFriends] = useState()
   const [friends, setFriends] = useState([])
@@ -23,7 +25,7 @@ const Friends = ({Email,UserId}) => {
     }
   }
   useEffect(()=>{
-    getUserFriends(ID)
+    // getUserFriends(UserId)
   },[])
 
 
