@@ -24,7 +24,7 @@ function Homepage() {
     try{
 
       const response = await fetch(
-        `http://localhost:3001/users/${email}`,
+        `http://localhost:3001/users/${user.email}`,
         {
         method:"GET",
         });
