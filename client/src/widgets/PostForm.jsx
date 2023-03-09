@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
-// import { useSelector } from 'react-redux'
-// import { selectUser } from '../features/userSlice'
+
 function PostForm({UserId}) {
-    // const user = useSelector(selectUser)
-    // const ID = user.uid
     const [postDescription, setPostDescription] = useState("")
     const [posts, setPosts] = useState([])
+
     const handlePostSubmission = async(e) =>{
         e.preventDefault()
         
@@ -22,8 +20,6 @@ function PostForm({UserId}) {
             console.log(Posts)
             setPostDescription("")
             getPosts()
-        // alert(UserId)
-        // alert(postDescription)
             
     }
     
@@ -58,9 +54,13 @@ function PostForm({UserId}) {
         // console.log(deletePost)
         getPosts()
     }
+
+    const AddFriend = (id) => {
+      console.log("userID - ",UserId)
+      console.log("friendID ToAdd - ", id)
+    }
     useEffect(()=>{
       getPosts()
-      // console.log("USER ID STORE -> ", user)
     },[])
   return (
     <>
@@ -78,7 +78,8 @@ function PostForm({UserId}) {
             <>
             <div className={`flex justify-between `}>
               
-            <p className='underline cursor-pointer'>{post.userId} - {post._id}</p>
+            <p className='underline cursor-pointer'>User: {post.userId} {/*- {post._id}*/} </p>
+            {(post.userId !== UserId)?<button className='p-2 bg-green-400 text-md rounded' onClick={()=>AddFriend(post.userId)}>Add</button>:""}
             {
              (UserId === post.userId)?<button className='bg-red-500 p-2 rounded text-white' onClick={()=>DeletePost(post._id)}>Delete</button>:''
 

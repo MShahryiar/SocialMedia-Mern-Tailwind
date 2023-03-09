@@ -1,8 +1,11 @@
 import React from 'react'
 
-function Friend({key, friendId}) {
+function Friend({id, email}) {
+  
   return (
-    <div key={key}><p>{friendId}</p></div>
+    <div>
+      <p key={id}>{email}</p>
+    </div>
   )
 }
 

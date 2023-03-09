@@ -25,16 +25,16 @@ export const getUser = async(req, res)=>{
     }
 }
 
-export const getAllUsers = async(req, res) =>{ 
-    try{
-        const users = await UserProfile.find()
-        res.status(200).json({users})
-        // res.json({message:"In All Users"})
-    }
-    catch(err){
-        res.status(404).json({message:err.message})
-    }
-}
+// export const getAllUsers = async(req, res) =>{ 
+//     try{
+//         const users = await UserProfile.find()
+//         res.status(200).json({users})
+//         // res.json({message:"In All Users"})
+//     }
+//     catch(err){
+//         res.status(404).json({message:err.message})
+//     }
+// }
 
 export const AddDeleteFriend = async(req,res)=>{
     try{
@@ -66,13 +66,22 @@ export const AddDeleteFriend = async(req,res)=>{
 export const getUserFriends = async(req,res) => {
     try{
         const {id} = req.params
-        const user = await UserProfile.findById(id)
 
-        const friends = await Promise.all(
-            user.friends.map((id) => UserProfile.findById(id))
-        )
-        res.status(200).json({friends})
-        // res.status(200).json(`Inside User Friends : ${id}`)
+            const user = await UserProfile.findById(id)
+    
+            const friends = await Promise.all(
+                user.friends.map((id) => UserProfile.findById(id))
+            )
+            // const formattedFriends = friends.map(
+            //     ({email, name, dob, city, country, fbLink, InstaLink}) => {
+            //       return { email, name, dob, city, country, fbLink, InstaLink };
+            //     }
+            //   );
+            //   res.status(200).json(formattedFriends);
+            res.status(200).json({friends})
+    
+
+        // res.status(200).json(`Inside User Friends : ID -  ${id}`)
 
     }
     catch(err){

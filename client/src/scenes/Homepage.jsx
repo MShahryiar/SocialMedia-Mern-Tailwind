@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { selectUser } from '../features/userSlice'
+import userSlice, { selectUser } from '../features/userSlice'
 import { useSelector } from 'react-redux'
 import { auth } from '../firebaseHandler'
 import Profile from '../widgets/Profile'
@@ -19,6 +19,7 @@ function Homepage() {
   const fb = userProfile.fbLink
   const insta = userProfile.InstaLink
 
+
   
   const getUser = async() => {
     try{
@@ -30,15 +31,10 @@ function Homepage() {
         });
         
       const data = await response.json()
-      
-      const userData = data.user[0]
-      setUserProfile(userData)
-      // console.log(user)
-        // const user = data.user[0]
-        // setUserProfile(user)
-        // console.log(userProfile.user[0])
-
-
+      if (data){
+        setUserProfile(data.user[0]) 
+        console.log(data.user[0]._id)       
+      }
     }
     catch(err){
       console.log(err)
@@ -62,9 +58,9 @@ function Homepage() {
     
     <div className='grid grid-cols-8 gap-3 m-2'>
       
-      <Profile UserId={userProfile._id} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
-      <Post UserId={userProfile._id}/>
-      <Friends Email={email} UserId={userProfile._id}/>
+      <Profile UserId={userProfile && userProfile._id} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
+      <Post UserId={userProfile && userProfile._id}/>
+      <Friends UserId={userProfile && userProfile._id}/>
     
     </div>
     </>
