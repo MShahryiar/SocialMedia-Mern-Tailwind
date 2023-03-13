@@ -60,6 +60,7 @@ export const AddDeleteFriend = async(req,res)=>{
     }
     catch(err){
         res.status(404).json({message:err.message})
+        // res.json({message: `Else check`})
     }
 }
 
@@ -67,21 +68,22 @@ export const getUserFriends = async(req,res) => {
     try{
         const {id} = req.params
 
-            const user = await UserProfile.findById(id)
+        const user = await UserProfile.findById(id)
     
-            const friends = await Promise.all(
-                user.friends.map((id) => UserProfile.findById(id))
-            )
+        const friends = await Promise.all(
+            user.friends.map((id) => UserProfile.findById(id))
+        )
             // const formattedFriends = friends.map(
             //     ({email, name, dob, city, country, fbLink, InstaLink}) => {
             //       return { email, name, dob, city, country, fbLink, InstaLink };
             //     }
             //   );
             //   res.status(200).json(formattedFriends);
-            res.status(200).json({friends})
+        res.status(200).json({friends})
     
 
-        // res.status(200).json(`Inside User Friends : ID -  ${id}`)
+            // res.status(200).json(`Inside User Friends : ID -  ${id}`)
+        
 
     }
     catch(err){

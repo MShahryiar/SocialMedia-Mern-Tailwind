@@ -36,17 +36,19 @@ function App() {
 
   return (
     <BrowserRouter>
+
+
     {
       !user ? (
         <Auth/>
-      ) : (
-        <Routes>        
+        ) : (
+          <Routes>        
           <Route path="/" name="profile" element={<ProfilePage/>} />
           <Route path="/index" name="index" element={<Homepage/>} />
         </Routes>
       )
     }
-      
+
     </BrowserRouter>
   )
 }

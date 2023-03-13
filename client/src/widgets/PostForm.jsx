@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState, useEffect, useContext } from 'react'
+import {setFriends} from "../features/userSlice"
+// import FriendContext from '../FriendsContext'
+import { useDispatch } from 'react-redux'
 function PostForm({UserId}) {
+    const dispatch = useDispatch()
     const [postDescription, setPostDescription] = useState("")
     const [posts, setPosts] = useState([])
+
 
     const handlePostSubmission = async(e) =>{
         e.preventDefault()
@@ -47,17 +51,24 @@ function PostForm({UserId}) {
         {
           method:"DELETE",
         },
-        // console.log("POST DELETED"),
-        // const res = response.json()
-        )
-        // const deletePost =  response.json()
-        // console.log(deletePost)
         getPosts()
-    }
+    )}
 
-    const AddFriend = (id) => {
-      console.log("userID - ",UserId)
-      console.log("friendID ToAdd - ", id)
+    const AddFriend = async(id) => {
+      try{
+
+        const response = await fetch(`http://localhost:3001/users/${UserId}/${id}`,
+        {
+          method:"PATCH",
+        })
+        const data = await response.json()
+        // addtoFriends(data)
+        dispatch(setFriends({ friends: data }))
+        console.log("Adding/Removing Friends - ",data)      
+      }
+      catch(err){
+        console.log(err)
+      }
     }
     useEffect(()=>{
       getPosts()
@@ -79,7 +90,7 @@ function PostForm({UserId}) {
             <div className={`flex justify-between `}>
               
             <p className='underline cursor-pointer'>User: {post.userId} {/*- {post._id}*/} </p>
-            {(post.userId !== UserId)?<button className='p-2 bg-green-400 text-md rounded' onClick={()=>AddFriend(post.userId)}>Add</button>:""}
+            {(post.userId !== UserId)?<button className='p-2 bg-green-400 text-md rounded' onClick={()=>AddFriend(post.userId)}>Add Friend</button>:""}
             {
              (UserId === post.userId)?<button className='bg-red-500 p-2 rounded text-white' onClick={()=>DeletePost(post._id)}>Delete</button>:''
 
