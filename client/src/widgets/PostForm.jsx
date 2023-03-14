@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {setFriends} from "../features/userSlice"
 // import FriendContext from '../FriendsContext'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 function PostForm({UserId}) {
     const dispatch = useDispatch()
     const [postDescription, setPostDescription] = useState("")
-    const [posts, setPosts] = useState([])
-
+    const [posts, setPosts] = useState([]) 
+    // const friends = useSelector((state) => state.user.friends);
 
     const handlePostSubmission = async(e) =>{
         e.preventDefault()

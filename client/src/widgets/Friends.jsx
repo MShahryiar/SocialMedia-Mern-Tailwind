@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFriends } from '../features/userSlice'
+import Friend from './Friend';
 // import Friend from './Friend'
 
 const Friends = ({UserId}) => {
@@ -43,7 +44,7 @@ useEffect(()=>{
     <div className='bg-red-200 col-span-2 h-fit p-5 '><span className='underline underline-offset-4 text-xl'>Friends</span> 
       { friends.length>0?<p>Friends Present</p>:<p>No Friends</p>}
       {friends?.map((friend)=>(
-        <p key={friend?._id}>{friend?.email}</p>
+        <Friend key={friend._id} id={friend._id} UserId={UserId} email={friend.email}/>
       ))}
       <p> User Friends - dispatch(store) - {friends?.length}</p>
     </div>
