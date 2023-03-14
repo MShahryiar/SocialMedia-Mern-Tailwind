@@ -63,7 +63,8 @@ function PostForm({UserId}) {
         })
         const data = await response.json()
         // addtoFriends(data)
-        dispatch(setFriends({ friends: data }))
+        dispatch(setFriends({ friends: data.friends }))
+        
         console.log("Adding/Removing Friends - ",data)      
       }
       catch(err){

@@ -34,18 +34,18 @@ const Friends = ({UserId}) => {
 
 useEffect(()=>{
   getUserFriends()
-  console.log("Coming from Store -> ",friends)
+  // console.log("Coming from Store -> ",friends)
 },[])// eslint-disable-line react-hooks/exhaustive-deps
 
 
 
   return (
     <div className='bg-red-200 col-span-2 h-fit p-5 '><span className='underline underline-offset-4 text-xl'>Friends</span> 
-      { friends?<p>Friends Present</p>:<p>No Friends</p>}
+      { friends.length>0?<p>Friends Present</p>:<p>No Friends</p>}
       {friends?.map((friend)=>(
         <p key={friend?._id}>{friend?.email}</p>
       ))}
-      <p> USER Friends - useState - {friends?.length}</p>
+      <p> User Friends - dispatch(store) - {friends?.length}</p>
     </div>
   )
 }
