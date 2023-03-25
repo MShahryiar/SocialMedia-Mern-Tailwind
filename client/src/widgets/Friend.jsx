@@ -27,7 +27,7 @@ function Friend({email,id,UserId}) {
 
   return (
     <div className='flex justify-between rounded-md bg-white p-1'>
-      <p >{email}</p>
+      <p >{email} - {id}</p>
       <button className='p-1 bg-red-500 text-white rounded-full' onClick={()=>PatchFriend(id)}>R</button>
     </div>
   )

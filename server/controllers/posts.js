@@ -25,6 +25,18 @@ export const getAllPosts = async(req, res) => {
     }
 }
 
+export const getUserPosts = async(req, res) => {
+    try{
+        const {userId} = req.params
+        const Userposts = await Post.find({userId:userId})
+        res.status(200).json({Userposts})
+        // res.status(200).json({message:`Fetching User ${userId} posts`})
+    }
+    catch(err){
+        res.status(404).json({message:err.message})
+    }
+}
+
 export const DeletePost = async (req, res) => {
     try{
         const {id} = req.params

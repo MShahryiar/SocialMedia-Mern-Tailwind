@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from 'react'
 import {setFriends} from "../features/userSlice"
 // import FriendContext from '../FriendsContext'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 function PostForm({UserId}) {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [postDescription, setPostDescription] = useState("")
     const [posts, setPosts] = useState([]) 
     // const friends = useSelector((state) => state.user.friends);
-
+    // const isFriend = friends.find((friend) => friend._id === friendId);
     const handlePostSubmission = async(e) =>{
         e.preventDefault()
         
@@ -90,7 +92,7 @@ function PostForm({UserId}) {
             <>
             <div className={`flex justify-between `}>
               
-            <p className='underline cursor-pointer'>User: {post.userId} {/*- {post._id}*/} </p>
+            <p className='underline cursor-pointer' onClick={()=>navigate(`/user/${post.userId}`)}>User: {post.userId} {/*- {post._id}*/} </p>
             {(post.userId !== UserId)?<button className='p-2 bg-green-400 text-md rounded' onClick={()=>AddFriend(post.userId)}>Add Friend</button>:""}
             {
              (UserId === post.userId)?<button className='bg-red-500 p-2 rounded text-white' onClick={()=>DeletePost(post._id)}>Delete</button>:''

@@ -42,7 +42,7 @@ useEffect(()=>{
 
   return (
     <div className='bg-red-200 col-span-2 h-fit p-5 '><span className='underline underline-offset-4 text-xl'>Friends</span> 
-      { friends.length>0?<p>Friends Present</p>:<p>No Friends</p>}
+      { friends?.length>0?<p>Friends Present</p>:<p>No Friends</p>}
       {friends?.map((friend)=>(
         <Friend key={friend._id} id={friend._id} UserId={UserId} email={friend.email}/>
       ))}
