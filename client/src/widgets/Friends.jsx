@@ -6,7 +6,7 @@ import Friend from './Friend';
 
 const Friends = ({UserId}) => {
   const friends = useSelector((state) => state.user.friends);
-  const posts = useSelector((state) => state.user.posts);
+  
   const dispatch = useDispatch()
   // const [userFriends, setUserFriends] = useState([])
 
@@ -48,7 +48,6 @@ useEffect(()=>{
         <Friend key={friend._id} id={friend._id} UserId={UserId} email={friend.email}/>
       ))}
       <p> User Friends - dispatch(store) - {friends?.length}</p>
-      <p>Reux Posts : {posts?.length}</p>
     </div>
   )
 }

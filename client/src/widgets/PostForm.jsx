@@ -128,7 +128,7 @@ function PostForm({UserId}) {
           </div>
         ))
         } */}
-        {posts.map(({
+        {reduxPosts.map(({
           _id, 
           userId,
           description,
