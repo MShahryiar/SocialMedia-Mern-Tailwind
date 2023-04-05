@@ -8,6 +8,7 @@ import {createSlice } from "@reduxjs/toolkit"
 const initialState =  {
     user:null,
     friends:[],
+    posts:[],
     // isLoading:false,
 }
 const userSlice = createSlice({
@@ -28,10 +29,20 @@ const userSlice = createSlice({
                 console.error("User friends non-existent.")
             }
         },
+        setPosts: (state, action) => {
+            state.posts = action.payload.posts;
+          },
+          setPost: (state, action) => {
+            const updatedPosts = state.posts.map((post) => {
+              if (post._id === action.payload.post._id) return action.payload.post;
+              return post;
+            });
+            state.posts = updatedPosts;
+          },
     }
 })
 
-export const {login, logout, setFriends} = userSlice.actions
+export const {login, logout, setFriends, setPosts, setPost} = userSlice.actions
 
 export const selectUser = (state) => state.user.user
 
