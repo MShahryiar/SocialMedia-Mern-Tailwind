@@ -9,6 +9,7 @@ const initialState =  {
     user:null,
     friends:[],
     posts:[],
+    activeUserId:"",
     // isLoading:false,
 }
 const userSlice = createSlice({
@@ -29,6 +30,9 @@ const userSlice = createSlice({
                 console.error("User friends non-existent.")
             }
         },
+        setUserId:(state, action)=>{
+            state.activeUserId = action.payload
+        },
         setPosts: (state, action) => {
             state.posts = action.payload.posts;
           },
@@ -42,7 +46,7 @@ const userSlice = createSlice({
     }
 })
 
-export const {login, logout, setFriends, setPosts, setPost} = userSlice.actions
+export const {login, logout, setFriends, setPosts, setPost, setUserId} = userSlice.actions
 
 export const selectUser = (state) => state.user.user
 

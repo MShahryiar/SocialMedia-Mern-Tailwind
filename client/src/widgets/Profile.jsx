@@ -1,12 +1,7 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUserId } from '../features/userSlice'
 function Profile({UserId, emailID,dob,city, country, fb, insta}) {
-
-
-
-
-
-
 
   return (
     <>
