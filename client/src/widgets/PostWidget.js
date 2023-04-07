@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import { setPost } from '../features/userSlice'
+import { setPost } from '../features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 function PostWidget({key, postUser, postId, description, likes, comments}) {
@@ -19,8 +19,8 @@ function PostWidget({key, postUser, postId, description, likes, comments}) {
       body: JSON.stringify({userId: loggedInUserId}),
     })
     const updatedPost = await response.json();
-    console.log(updatedPost)
-    // dispatch(setPost({ post: updatedPost }));
+    // console.log(updatedPost)
+    dispatch(setPost({ post: updatedPost }));
     // const updatedPost = await response.json();
     // console.log(updatedPost)
     // console.log(isLiked)
