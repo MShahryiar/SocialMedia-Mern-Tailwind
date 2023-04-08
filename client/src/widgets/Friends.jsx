@@ -25,6 +25,7 @@ const Friends = ({UserId}) => {
         // setUserFriends(data.friends)
         // console.log("user Friends - FETCHED",userFriends)
         dispatch(setFriends({friends:data.friends}))
+        // console.log(data)
         
       }
       catch(err){
