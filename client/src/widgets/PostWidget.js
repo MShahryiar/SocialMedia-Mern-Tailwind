@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { setPost } from '../features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { HandThumbUpIcon as OutlineThumbsUp} from '@heroicons/react/24/outline'
+import { HandThumbUpIcon as SolidThumbsUp} from "@heroicons/react/24/solid"
 
-function PostWidget({key, postUser, postId, description, likes, comments}) {
+function PostWidget({postUser, postId, description, likes, comments}) {
   const dispatch = useDispatch()
   const loggedInUserId = useSelector((state) => state.user.activeUserId)
   
@@ -27,10 +29,10 @@ function PostWidget({key, postUser, postId, description, likes, comments}) {
   };
   return (
 
-    <div>
-      <p key={postId}>{description}</p>
-      <button onClick={()=>patchLike()} className="bg-red-400 p-1 rounded text-white ">{isLiked?"Un-Like":"Like"}</button>
-      <p>Likes : {likeCount}</p>
+    <div key={postId} className='bg-white m-2 mt-5 p-5'>
+      <div className='flex justify-start items-center space-x-3'><div className='bg-red-600 h-10 w-10 rounded-full'></div><p>{postUser}</p></div>
+      <p className='p-5 text-lg'>{description}</p>
+      <button  className='flex items-center'  onClick={()=>patchLike()}>{isLiked?(<SolidThumbsUp className='h-10 w-10 text-green-600'/>):(<OutlineThumbsUp className='h-10 w-10'/>)} <span className='ml-3'>{likeCount}</span></button>
     </div>
   )
 }

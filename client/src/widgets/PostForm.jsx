@@ -79,15 +79,6 @@ function PostForm({UserId}) {
       }
     }
 
-    const LikePost = async(postId) =>{
-      try{
-        console.log("PostID - ",postId)
-        console.log("UserID -",UserId)
-      }
-      catch(err){
-        console.log(err)
-      }
-    }
     useEffect(()=>{
       getPosts()
     },[])

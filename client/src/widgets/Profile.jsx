@@ -16,10 +16,6 @@ function Profile({UserId, emailID,dob,city, country, fb, insta}) {
         <p>Country : {country?country:"N/A"}</p>
         <p>Faebook : {fb?fb:'N/A'}</p>
         <p>Insta : {insta?insta:"N/A"}</p>
-    <div>
-      <h1 className='underline text-2xl '>Friends</h1>
-     
-    </div>
     </div>
     
     </>
