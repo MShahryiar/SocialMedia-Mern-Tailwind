@@ -3,8 +3,10 @@ import { setPost } from '../features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { HandThumbUpIcon as OutlineThumbsUp} from '@heroicons/react/24/outline'
 import { HandThumbUpIcon as SolidThumbsUp} from "@heroicons/react/24/solid"
+import { UserPlusIcon } from '@heroicons/react/24/outline'
+import { TrashIcon } from '@heroicons/react/24/solid'
 
-function PostWidget({postUser, postId, description, likes, comments}) {
+function PostWidget({activeUser,postUser, postId, description, likes, comments}) {
   const dispatch = useDispatch()
   const loggedInUserId = useSelector((state) => state.user.activeUserId)
   
@@ -30,7 +32,13 @@ function PostWidget({postUser, postId, description, likes, comments}) {
   return (
 
     <div key={postId} className='bg-white m-2 mt-5 p-5'>
-      <div className='flex justify-start items-center space-x-3'><div className='bg-red-600 h-10 w-10 rounded-full'></div><p>{postUser}</p></div>
+      <div className='flex justify-between'>
+        <div className='flex justify-start items-center space-x-3'><div className='bg-red-600 h-10 w-10 rounded-full'></div><p>{postUser}</p></div>
+        <div>
+          {postUser !== activeUser ? <button><UserPlusIcon className='h-7 w-7'/></button>:""}
+          {activeUser === postUser ? <button><TrashIcon className='h-7 w-7  text-red-600'/></button>:""}
+        </div>
+      </div>
       <p className='p-5 text-lg'>{description}</p>
       <button  className='flex items-center'  onClick={()=>patchLike()}>{isLiked?(<SolidThumbsUp className='h-10 w-10 text-green-600'/>):(<OutlineThumbsUp className='h-10 w-10'/>)} <span className='ml-3'>{likeCount}</span></button>
     </div>

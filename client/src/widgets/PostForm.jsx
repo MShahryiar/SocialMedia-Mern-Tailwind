@@ -128,6 +128,7 @@ function PostForm({UserId}) {
 
         })=>(
           <PostWidget
+            activeUser = {UserId}
             key={_id}
             postUser={userId}
             postId={_id}
