@@ -16,9 +16,9 @@ function Friend({email,id,UserId}) {
       })
       const data = await response.json()
       // addtoFriends(data)
-      // dispatch(setFriends({ friends: data.friends }))
+      dispatch(setFriends({ friends: data.friends }))
       // console.log(data)      
-      console.log("Adding/Removing Friends - FriendsWidget ",data)      
+      // console.log("Adding/Removing Friends - FriendsWidget ",data)      
     }
     catch(err){
       console.log(err)

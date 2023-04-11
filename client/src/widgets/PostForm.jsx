@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import {setFriends} from "../features/userSlice"
+
 // import FriendContext from '../FriendsContext'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from '../features/userSlice'
@@ -11,8 +11,7 @@ function PostForm({UserId}) {
     const reduxPosts = useSelector((state) => state.user.posts)
     const [postDescription, setPostDescription] = useState("")
     const [posts, settingPosts] = useState([]) 
-    // const friends = useSelector((state) => state.user.friends);
-    // const isFriend = friends.find((friend) => friend._id === friendId);
+
     const handlePostSubmission = async(e) =>{
         e.preventDefault()
         
@@ -61,23 +60,7 @@ function PostForm({UserId}) {
         getPosts()
     )}
 
-    const AddFriend = async(id) => {
-      try{
 
-        const response = await fetch(`http://localhost:3001/users/${UserId}/${id}`,
-        {
-          method:"PATCH",
-        })
-        const data = await response.json()
-        // addtoFriends(data)
-        dispatch(setFriends({ friends: data.friends }))
-        
-        console.log("Adding/Removing Friends - ",data)      
-      }
-      catch(err){
-        console.log(err)
-      }
-    }
 
     useEffect(()=>{
       getPosts()
