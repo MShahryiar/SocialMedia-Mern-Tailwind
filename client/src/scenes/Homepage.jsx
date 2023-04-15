@@ -21,6 +21,7 @@ function Homepage() {
   const fb = userProfile.fbLink
   const insta = userProfile.InstaLink
   const userId = userProfile._id
+  const [userAvailable, setUserAvailable] = useState(false)
   const getUser = async() => {
     try{
 
@@ -31,14 +32,17 @@ function Homepage() {
         });
         
       const data = await response.json()      
-      if (data){
+      if (data.user[0]){
         setUserProfile(data.user[0])
         // dispatch(setUserId({}))
         const LoggedinUserId = String(data.user[0]._id)
         dispatch(setUserId(LoggedinUserId))
+        setUserAvailable(true)
       }
       else{
         console.log("loading")
+        setUserAvailable(false)
+        
       }
     }
     catch(err){
@@ -57,18 +61,20 @@ function Homepage() {
     <>
     <nav className='bg-red-300 w-full p-1 flex justify-between'>
     <div className='flex items-center'><h1 className='text-2xl text-white font-bold'>Social Media App</h1></div>
-    <div className='items-center flex'><p className='text-white text-xl '>Welcome - <span className='underline underline-offset-8 cursor-pointer' onClick={() => navigate("/")}>{user?.email}</span></p></div>
+    <div className='items-center flex'><p className='text-white text-xl '>Welcome - <span className='underline underline-offset-8 cursor-pointer' onClick={() => navigate("/")}>{email}</span></p></div>
     <button className='bg-red-400 hover:bg-white hover:text-red-400 hover:border-red-400 text-sm m-2 rounded-md p-3 text-white ' onClick={()=>auth.signOut()}>Logout</button>
     </nav>
     
     <div className='grid grid-cols-8 gap-3 m-2'>
-      
-      <Profile UserId={userProfile?userProfile._id:"null"} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
+      {userAvailable?(
+        <Profile UserId={userProfile?userProfile._id:"null"} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
+
+      ):<p>Fill the form in the <span className='underline cursor-pointer' onClick={()=>navigate("/")}>profile</span> section to see the data here.</p>}
       <Post UserId={userProfile?userProfile._id:"null"}/>
-      {userId?(
+      {userAvailable?(
 
         <Friends UserId={userId}/>
-      ):<p>Loading</p>}
+      ):<p>Complete the <span className='underline cursor-pointer' onClick={()=>navigate("/")}>profile</span> section to see this section.</p>}
     
     </div>
     </>

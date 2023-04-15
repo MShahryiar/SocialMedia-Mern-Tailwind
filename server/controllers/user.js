@@ -19,6 +19,7 @@ export const getUser = async(req, res)=>{
         const {email} = req.params
 
         const user = await UserProfile.find({email:email})
+
         res.status(200).json({user})
     }catch(err){
         res.status(404).json({message:err.message})

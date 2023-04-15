@@ -6,36 +6,44 @@ const UserProfileSchema = new mongoose.Schema({
         required:true,
         unique:true,
         max:50,
+        
     },
     name:{
         type:String,
         required:true,
         min:2, 
         max:50,
+        default:"N/A"
     },
     dob:{
         type:Date,
-        required:true
+        required:true,
+        default:"N/A"
     },
     city:{
         type:String,
         required:true,
         min:2, 
         max:50,
+        default:"N/A"
     },
     country:{
         type:String,
         required:true,
         min:2, 
         max:50,
+        default:"N/A"
     },
     fbLink:{
         type:String,
-        required:true
+        required:true,
+        default:"N/A"
     },
     InstaLink:{
         type:String,
-        required:true
+        required:true,
+        default:"N/A"
+        
     },
     friends:{
             type:Array,

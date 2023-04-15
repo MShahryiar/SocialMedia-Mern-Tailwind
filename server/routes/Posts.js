@@ -7,7 +7,7 @@ const router = express.Router()
 router.post('/', createPost)
 router.get('/',getAllPosts)
 router.delete('/:id', DeletePost)
-router.get('/user/:userId', getUserPosts)
+router.get('/:userId/posts', getUserPosts)
 router.patch('/:id/like', likePost)
 
 

@@ -46,7 +46,7 @@ function App() {
           <Routes>        
           <Route path="/" name="profile" element={<ProfilePage/>} />
           <Route path="/index" name="index" element={<Homepage/>} />
-          <Route path="/user/:id" name="index" element={<UserPage/>} />
+          <Route path="/user/:id" name="user" element={<UserPage/>} />
         </Routes>
       )
     }

@@ -23,6 +23,7 @@ const Auth = () =>  {
         .then((authUser)=>{
             console.log(`${authUser} created`)
             alert("User Created")
+            // alert("Checking for additional functionality")
         }).catch((error)=>{
             alert(error.message)
         })

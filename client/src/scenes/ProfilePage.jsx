@@ -14,7 +14,7 @@ function ProfilePage() {
   const [country, setcountry] = useState("")
   const [fbLink, setFbLink] = useState("")
   const [InstaLink, setInstaLink] = useState("")
-  
+  // const [userPresent, setUserPresent] = useState(false)
   
 
   const handleUserSubmission = async(e) =>{

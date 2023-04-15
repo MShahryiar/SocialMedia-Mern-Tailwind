@@ -11,6 +11,7 @@ function PostForm({UserId}) {
     const reduxPosts = useSelector((state) => state.user.posts)
     const [postDescription, setPostDescription] = useState("")
     const [posts, settingPosts] = useState([]) 
+    
 
     const handlePostSubmission = async(e) =>{
         e.preventDefault()
@@ -51,6 +52,25 @@ function PostForm({UserId}) {
         }
         
     }
+
+    const getUserPosts = async() =>{
+      try{
+
+        const api  = await fetch(`http://localhost:3001/posts/user/${UserId}`,{
+            method:"GET"
+        })
+        
+        const data = await api.json()
+        const posts = data.posts
+        // console.log(data.posts)
+        settingPosts(data.posts)
+        dispatch(setPosts({posts}));
+      }
+      catch(err){
+        console.log(err)
+      }
+      
+  }
     const DeletePost = async(id) => {
       const response = await fetch(
         `http://localhost:3001/posts/${id}`,
