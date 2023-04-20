@@ -89,10 +89,10 @@ function PostForm({UserId}) {
     <>
         <form className="w-full  border-red-400" onSubmit={handlePostSubmission}>
             <div className='p-3'>
-                <input maxLength={100} onChange={(e)=>setPostDescription(e.target.value)} required  className='w-full p-2 rounded-md placeholder:text-dark'  placeholder="What's on your mind today?"/>
+                <input maxLength={100} onChange={(e)=>setPostDescription(e.target.value)} required  className='w-full p-2 h-20 text-lg rounded-md bg-gray-600 text-white placeholder:text-white'  placeholder="What's on your mind today?"/>
             </div>
             <div className='justify-end flex mx-3'>
-                <button className='bg-white p-3 rounded-md'>Post</button>
+                <button className='text-white p-3 rounded-md bg-green-800'>Post</button>
             </div>
         </form>
 

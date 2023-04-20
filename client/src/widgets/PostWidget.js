@@ -59,7 +59,7 @@ function PostWidget({activeUser,postUser, postId, description, likes, comments})
 
     <div key={postId} className='bg-white border-dashed border-2 rounded   border-emerald-700 m-2 mt-5 p-5 '>
       <div className='flex justify-between'>
-        <div className='flex justify-start items-center space-x-3'><div className='bg-red-600 h-10 w-10 rounded-full'></div><p onClick={()=>navigate(`/user/${postUser}`)}>{postUser}</p></div>
+        <div className='flex justify-start items-center space-x-3'><div className='bg-red-600 h-10 w-10 rounded-full'></div><p className='hover:cursor-pointer hover:underline' onClick={()=>navigate(`/user/${postUser}`)}>{postUser}</p></div>
         <div>
           {postUser !== activeUser ? <button onClick={()=>AddFriend()}>{isFriend?<UserMinusIcon className='h-7 w-7'/>:<UserPlusIcon className='h-7 w-7'/>}</button>:""}
           {activeUser === postUser ? <button><TrashIcon className='h-7 w-7  text-red-600'/></button>:""}

@@ -34,12 +34,15 @@ function UserPage() {
     <>
     
     <div className='w-full flex justify-between items-center p-2 bg-red-100'>
-    <p>UserPage - <span className='underline'>{params.id}</span></p>
+    <p>UserPage</p>
+    {/* <p><span className='underline text-xl'>{params.id}</span></p> */}
     <p className='bg-white p-2 rounded cursor-pointer' onClick={()=>navigate("/index")}>Homepage</p>
 
     </div>
     <div className="w-full bg-green-200 p-2 flex justify-center">
         <div className='w-1/2 bg-red-200 text-center'>
+        <p className='underline text-xl bg-white p-10'><span>{params.id}</span></p>
+        <p className='bg-white pb-10 text-3xl'>POSTS</p>
             <div>
               {
                 posts?.map((post)=>(
