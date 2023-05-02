@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HandThumbUpIcon as OutlineThumbsUp} from '@heroicons/react/24/outline'
 import { HandThumbUpIcon as SolidThumbsUp} from "@heroicons/react/24/solid"
 import { UserPlusIcon, UserMinusIcon } from '@heroicons/react/24/outline'
+import { ChatBubbleBottomCenterTextIcon as Chat } from '@heroicons/react/24/outline'
 import { TrashIcon } from '@heroicons/react/24/solid'
 import {setFriends} from "../features/userSlice"
 import { useNavigate } from 'react-router-dom'
@@ -16,11 +17,29 @@ function PostWidget({activeUser,postUser, postId, description, likes, comments})
   
   const isLiked = Boolean(likes[loggedInUserId])
   const likeCount = Object.keys(likes).length
+  const commentsCount = comments.length
   const friends = useSelector((state) => state.user.friends);
   const isFriend = friends.find((friend) => friend._id === postUser);
+  const [commentsSection, setCommentsSection] = useState(false)
+  const [commentDescription, setCommentDescription] = useState("")
 
+  const handleSubmit = async(e) => {
+      e.preventDefault()
 
+      const response = await fetch(`http://localhost:3001/posts/${postId}`,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+      },
+      body: JSON.stringify({activeUser, commentDescription}),
+      })
+      
+      const updatedPost = await response.json();
+      console.log(updatedPost)
+      // dispatch(setPost({ post: updatedPost }));
 
+  }
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
       method: "PATCH",
@@ -66,7 +85,25 @@ function PostWidget({activeUser,postUser, postId, description, likes, comments})
         </div>
       </div>
       <p className='p-5 text-lg'>{description}</p>
+      <div className='flex justify-between'>
+
       <button  className='flex items-center'  onClick={()=>patchLike()}>{isLiked?(<SolidThumbsUp className='h-10 w-10 text-green-600'/>):(<OutlineThumbsUp className='h-10 w-10'/>)} <span className='ml-3'>{likeCount}</span></button>
+      <button className='flex'><Chat className='h-7 w-7' onClick={()=>setCommentsSection(!commentsSection)}/>{commentsCount}</button>
+      </div>
+      <div className=' mt-5'>
+        {commentsSection && (
+
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className='flex space-x-3 '>
+            <input maxLength={50} onChange={(e)=>setCommentDescription(e.target.value)} required  className='w-full p-2  text-lg rounded-md border border-black'/>
+            <button className='bg-gray-800 rounded p-2 text-white' >Comment</button>
+            </div>
+          </form>
+        </div>
+        )}
+       
+      </div>
     </div>
   )
 }
