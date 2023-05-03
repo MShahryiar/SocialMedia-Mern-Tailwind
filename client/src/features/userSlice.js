@@ -10,6 +10,7 @@ const initialState =  {
     friends:[],
     posts:[],
     activeUserId:"",
+    comments:[],
     // isLoading:false,
 }
 const userSlice = createSlice({

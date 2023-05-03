@@ -92,7 +92,7 @@ function PostWidget({activeUser,postUser, postId, description, likes, comments})
       </div>
       <div className=' mt-5'>
         {commentsSection && (
-
+          <>
         <div>
           <form onSubmit={handleSubmit}>
             <div className='flex space-x-3 '>
@@ -101,6 +101,12 @@ function PostWidget({activeUser,postUser, postId, description, likes, comments})
             </div>
           </form>
         </div>
+        <div className='bg-white mt-4'>
+            {comments.slice(0,4).map((comment, idx)=>(
+              <p key={idx}>({comment.activeUser})-{comment.commentDescription}</p>
+            ))}
+        </div>
+          </>
         )}
        
       </div>
