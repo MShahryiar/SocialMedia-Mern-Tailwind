@@ -90,7 +90,46 @@ export const likePost = async (req, res) => {
         { new: true }
       );
   
-      res.status(200).json({post:updatedPost, activeUser:activeUser, comment:commentDescription});
+      res.status(200).json(updatedPost);
+    // res.status(404).json({userID:userId, postId:id})
+    } catch (err) {
+      res.status(404).json({ message: err.message });
+    }
+  };
+
+  export const deleteComment = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { comment } = req.body;
+      
+      const post = await Post.findById(id);
+     
+      // const found = post.comments.find((comment) => comment.commentDescription === comment)
+      post.comments = post.comments.filter((commentDel) => commentDel.commentDescription !== comment);
+      await post.save()
+
+      // const updatedPost = await Post.findByIdAndUpdate(
+      //   id,
+      //   { comments: post.comments },
+      //   { new: true }
+      // );
+  
+      // const idx = post.comments.indexOf(found)
+      // const idxToDelete = post.comments.findIndex(found)
+
+      // if (found)(
+      //   idx = post.comments.findIndex(found)
+
+      // )
+      // post.comments.push({activeUser, commentDescription})
+  
+      // const updatedPost = await Post.findByIdAndUpdate(
+      //   postId,
+      //   { comments: post.comments },
+      //   { new: true }
+      // );
+  
+      res.status(200).json(post);
     // res.status(404).json({userID:userId, postId:id})
     } catch (err) {
       res.status(404).json({ message: err.message });

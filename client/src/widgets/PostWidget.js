@@ -36,10 +36,29 @@ function PostWidget({activeUser,postUser, postId, description, likes, comments})
       })
       
       const updatedPost = await response.json();
-      console.log(updatedPost)
-      // dispatch(setPost({ post: updatedPost }));
+      // console.log(updatedPost)
+      dispatch(setPost({ post: updatedPost }));
 
   }
+
+  const deleteComment = async(comment) => {
+      
+    const response = await fetch(`http://localhost:3001/posts/${postId}/comment`,{
+      method:"DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({comment: comment}),
+    })
+    const updatedPost = await response.json()
+    // const deletedComment = await response.json()
+    // console.log("comment deleted.",deletedComment.message)
+    //   // const deletedComment = 
+    //   // console.log(await response.json())
+    // console.log(updatedPost)
+    dispatch(setPost({ post: updatedPost }));
+  }
+
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
       method: "PATCH",
@@ -102,8 +121,8 @@ function PostWidget({activeUser,postUser, postId, description, likes, comments})
           </form>
         </div>
         <div className='bg-white mt-4'>
-            {comments.slice(0,4).map((comment, idx)=>(
-              <p key={idx}>({comment.activeUser})-{comment.commentDescription}</p>
+            {comments.map((comment, idx)=>(
+              <p key={idx} className='mt-2'>({comment.activeUser})-{comment.commentDescription} {comment.activeUser === activeUser?<button onClick={()=>deleteComment(comment.commentDescription)} className='bg-gray-200 p-1 rounded-full'>x</button>:""}</p>
             ))}
         </div>
           </>
