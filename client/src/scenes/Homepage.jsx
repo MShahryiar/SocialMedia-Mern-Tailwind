@@ -7,8 +7,10 @@ import Post from '../widgets/Post'
 import Friends from '../widgets/Friends'
 import { useNavigate } from 'react-router-dom'
 import { setUserId } from '../features/userSlice'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 
 function Homepage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const user = useSelector(selectUser)
@@ -62,18 +64,39 @@ function Homepage() {
     <nav className='bg-black w-full p-1 flex justify-between'>
     <div className='flex items-center'><h1 className='text-2xl text-white font-bold'>Social Media App</h1></div>
     <div className='items-center flex'><p className='text-white text-xl '>Welcome - <span className='underline underline-offset-8 cursor-pointer' onClick={() => navigate("/")}>{email}</span></p></div>
+    <button className=' text-white md:hidden block' onClick={()=>setIsMenuOpen(!isMenuOpen)}>
+      <Bars3Icon className='h-10 w-10'/>
+    </button>
     <button className='bg-red-400 hover:bg-white hover:text-red-400 hover:border-red-400 text-sm m-2 rounded-md p-3 text-white ' onClick={()=>auth.signOut()}>Logout</button>
+    {isMenuOpen && (
+
+    <div className='fixed h-full right-0 top-0 w-[350px] bg-white drop-shadow-lg'>
+      <div className="flex justify-end p-12">
+        <button onClick={()=>setIsMenuOpen(!isMenuOpen)} className='flex justify-items-end' >
+          <div><h1 className='text-xl bg-red-400 text-white cursor-pointer p-2 rounded-md'>Close</h1></div>
+        </button>
+      </div>
+      {userAvailable&&(
+        <Profile UserId={userProfile?userProfile._id:"null"} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
+
+      )      }   
+      {userAvailable&&(
+
+<Friends UserId={userId}/>
+)}
+    </div>
+    )}
     </nav>
     
-    <div className='grid grid-cols-8 gap-3 p-1 bg-gray-100'>
+    <div className=' gap-3 p-1 flex bg-gray-100'>
       {userAvailable?(
-        <Profile UserId={userProfile?userProfile._id:"null"} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
+        <Profile hiddenClass='hidden md:block' UserId={userProfile?userProfile._id:"null"} emailID={emailID} dob={dob} city={city} country={country} fb={fb} insta={insta}/>
 
       ):<p>Fill the form in the <span className='underline cursor-pointer' onClick={()=>navigate("/")}>profile</span> section to see the data here.</p>}
       <Post UserId={userProfile?userProfile._id:"null"}/>
       {userAvailable?(
 
-        <Friends UserId={userId}/>
+        <Friends hiddenClass='hidden md:block' UserId={userId}/>
       ):<p>Complete the <span className='underline cursor-pointer' onClick={()=>navigate("/")}>profile</span> section to see this section.</p>}
     
     </div>

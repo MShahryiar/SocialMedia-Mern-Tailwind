@@ -4,7 +4,7 @@ import { setFriends } from '../features/userSlice'
 import Friend from './Friend';
 // import Friend from './Friend'
 
-const Friends = ({UserId}) => {
+const Friends = ({hiddenClass,UserId}) => {
   const friends = useSelector((state) => state.user.friends);
   
   const dispatch = useDispatch()
@@ -43,7 +43,7 @@ useEffect(()=>{
 
 
   return (
-    <div className='bg-white rounded col-span-2 h-fit p-5 mt-2'><span className='underline underline-offset-4 text-xl'>Friends</span> 
+    <div className={`bg-white ${hiddenClass} rounded  h-fit p-5 mt-2`}><span className='underline underline-offset-4 text-4xl'>Friends</span> 
       { friends?.length>0?<p></p>:(<><p>No Friends</p><p>Add Friends to see them here.</p></>)}
       {friends?.map((friend)=>(
         <Friend key={friend._id} id={friend._id} UserId={UserId} email={friend.email}/>
